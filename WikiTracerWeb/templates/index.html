@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Wiki Path Finder</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+<body>
+    <h1>Find a path between Wikipedia articles</h1>
+    <form id="path-finder-form">
+        <label for="start_url">Start URL:</label>
+        <input type="url" id="start_url" name="start_url" required>
+        <br>
+        <label for="end_url">End URL:</label>
+        <input type="url" id="end_url" name="end_url" required>
+        <br>
+        <input type="submit" value="Find Path">
+    </form>
+    <h2>Path:</h2>
+    <ul id="path-result"></ul>
+
+    <script>
+        $("#path-finder-form").submit(function(event) {
+            event.preventDefault();
+            $.post('/find_path', $(this).serialize(), function(data) {
+                $("#path-result").empty();
+                if (data.path_found) {
+                    data.path.forEach(function(url) {
+                        $("#path-result").append(`<li><a href="${url}">${url}</a></li>`);
+                    });
+                } else {
+                    $("#path-result").append("<li>No path found.</li>");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
