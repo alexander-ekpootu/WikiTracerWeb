@@ -16,8 +16,9 @@ BeautifulSoup
 jQuery
 # How to run locally
 Clone this repository.
-Install the required packages listed in requirements.txt.
-Run the Flask application by executing the Backend.py file in your terminal.
+Install the required packages.
+Run the Flask application by executing the Backend.py file in your terminal, you will have to change some paths to 
+match your local setup.
 Open your web browser and navigate to http://localhost:5001.
 Enter the start URL and end URL for the Wikipedia articles you want to find a path between, and click the "Find Path" button.
 
